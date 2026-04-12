@@ -2,7 +2,7 @@
 layout: page
 title: About
 ---
-
+<link rel="stylesheet" href="/assets/css/style.css">
 ## 👨‍💻 Who Am I?
 
 I’m Ashura — a tech enthusiast focused on:
