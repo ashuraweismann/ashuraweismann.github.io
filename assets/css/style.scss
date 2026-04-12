@@ -51,3 +51,29 @@ hr {
   border: 0;
   border-top: 1px solid #00ff9f !important;
 }
+
+/* =========================
+   TERMINAL EFFECT
+========================= */
+
+.terminal {
+  background: #010409;
+  padding: 15px;
+  border: 1px solid #00ff9f;
+  color: #00ff9f;
+  font-family: "Courier New", monospace;
+  margin-bottom: 20px;
+}
+
+/* Glow Title */
+.glow {
+  color: #00ff9f;
+  text-shadow: 0 0 5px #00ff9f, 0 0 10px #00ff9f;
+  letter-spacing: 2px;
+}
+
+/* Subtitle */
+.subtitle {
+  color: #00ffaa;
+  font-style: italic;
+}
