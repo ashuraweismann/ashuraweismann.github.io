@@ -1,4 +1,13 @@
-title: DarkShadow Tech Blog 🔥
+title: darkShadow Tech Blog
 description: CTF | Networking | Cyber Skills
-theme: minima
 author: Ashura
+
+theme: minima
+
+# Dark hacker styling
+minima:
+  skin: dark
+
+header_pages:
+  - index.md
+  - about.md
