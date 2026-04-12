@@ -3,6 +3,7 @@ layout: post
 title: "Understanding Internet Speed: What Really Matters?"
 date: 2026-04-12
 ---
+<link rel="stylesheet" href="/assets/css/style.css">
 
 ## 🚀 Understanding Internet Speed: What Really Matters?
 
