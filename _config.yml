@@ -2,6 +2,9 @@ title: darkShadow Tech Blog
 description: CTF | Networking | Cyber Skills
 author: Ashura
 
+sass:
+  style: compressed
+
 theme: minima
 
 # Dark hacker styling
