@@ -2,19 +2,29 @@
 layout: home
 title: Home
 ---
-<link rel="stylesheet" href="/assets/css/style.css">
 
-<h2 style="color:#00ff9f;">> Initializing system...</h2>
-<p>> Access granted.</p>
+# 💻 DarkShadow Blog
 
-# 💻 Welcome to darkShadow Tech Blog
+> “Learning networking, security, and breaking things to understand them.”
 
-> "Knowledge is power. Execution is everything."
+---
 
-🚀 Topics I cover:
-- Networking fundamentals  
-- Internet technologies  
-- CTF writeups  
-- Cybersecurity basics  
+## 🚀 About This Blog
 
-🔥 Stay sharp. Stay curious.
+Welcome to my tech space where I share:
+
+- 🌐 Networking concepts  
+- 🛡️ Cybersecurity & CTF writeups  
+- ⚡ Internet & systems knowledge  
+
+---
+
+## ⭐ Featured Post
+
+👉 [Understanding Internet Speed: What Really Matters?](/2026/04/12/internet-speed.html)
+
+---
+
+## 🧠 Latest Thoughts
+
+Stay tuned for more posts...
