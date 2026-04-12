@@ -2,81 +2,76 @@
 ---
 
 /* =========================
-   GLOBAL BACKGROUND FIX
+   GLOBAL RESET
 ========================= */
 
 html, body {
-  background: #0d1117 !important;
-  color: #00ff9f !important;
-  font-family: "Courier New", monospace !important;
+  margin: 0;
+  padding: 0;
+  background: #0d1117;
+  color: #00ff9f;
+  font-family: "Courier New", monospace;
+  overflow-x: hidden;
 }
 
-/* Minima wrapper layers */
-.wrapper,
-.site,
-.page-content {
-  background: #0d1117 !important;
-}
-.wrapper {
-  max-width: 800px !important;
-  margin: 0 auto !important;
-}
+/* =========================
+   LINKS + HEADINGS
+========================= */
 
-/* POSTS + PAGES */
-
-.page,
-.post-content {
-  background: #0d1117 !important;
-  color: #00ff9f !important;
-}
-
-/* LINKS */
 a {
-  color: #00ff9f !important;
+  color: #00ff9f;
+  text-decoration: none;
 }
 
-/* HEADER / FOOTER */
-.site-header,
-.site-footer {
-  background: #010409 !important;
-  border-color: #00ff9f !important;
+a:hover {
+  color: #00ffaa;
 }
 
-/* TEXT BLOCKS */
-h2, h3, h4 {
-  color: #00ff9f !important;
-}
 h1 {
-  border-bottom: 1px solid #00ff9f !important;
-  padding-bottom: 5px !important;
+  border-bottom: 1px solid #00ff9f;
+  padding-bottom: 5px;
+}
+
+h2, h3, h4 {
+  color: #00ff9f;
 }
 
 hr {
   border: 0;
-  border-top: 1px solid #00ff9f !important;
+  border-top: 1px solid #00ff9f;
 }
 
 /* =========================
-   TERMINAL EFFECT
+   WRAPPER / CONTENT FIX
+========================= */
+
+/* IMPORTANT: remove Minima center layout */
+.wrapper {
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+.page-content {
+  background: #0d1117;
+}
+
+/* =========================
+   TERMINAL EFFECTS
 ========================= */
 
 .terminal {
   background: #010409;
   padding: 15px;
   border: 1px solid #00ff9f;
-  color: #00ff9f;
-  font-family: "Courier New", monospace;
   margin-bottom: 20px;
 }
 
-/* Glow Title */
 .glow {
   color: #00ff9f;
   text-shadow: 0 0 5px #00ff9f, 0 0 10px #00ff9f;
   letter-spacing: 2px;
 }
 
-/* Subtitle */
 .subtitle {
   color: #00ffaa;
   font-style: italic;
@@ -98,42 +93,37 @@ hr {
   50% { border-color: transparent; }
 }
 
-.post {
-  background: #0d1117;
-  border: 1px solid #00ff9f;
-  padding: 20px;
-  margin-top: 20px;
-}
+/* =========================
+   POST STYLING
+========================= */
 
-.post-title {
-  color: #00ff9f;
+.post-content {
+  background: #0d1117;
+  padding: 20px;
 }
 
 /* =========================
-   LINUX SHELL LAYOUT
+   LINUX SHELL LAYOUT FIX
 ========================= */
 
-body {
-  margin: 0;
-  background: #0d1117;
-  color: #00ff9f;
-  font-family: "Courier New", monospace;
-}
-
-/* Main shell layout */
 .shell {
   display: flex;
-  min-height: 100vh;
 }
 
-/* Sidebar */
+/* SIDEBAR (FIXED - NO OVERLAY NOW) */
 .sidebar {
   width: 220px;
   background: #010409;
   border-right: 1px solid #00ff9f;
-  padding: 20px;
+
   position: fixed;
-  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  padding: 20px;
+  overflow-y: auto;
+  z-index: 1000;
 }
 
 .sidebar .logo {
@@ -144,8 +134,6 @@ body {
 
 .sidebar nav a {
   display: block;
-  color: #00ff9f;
-  text-decoration: none;
   margin: 10px 0;
 }
 
@@ -153,16 +141,16 @@ body {
   color: #00ffaa;
 }
 
-/* Main content */
-.content {
-  margin-left: 220px;
-  padding: 30px;
-  width: 100%;
-}
-
-/* Status block */
 .status {
   margin-top: 30px;
   font-size: 12px;
   color: #00ffaa;
+}
+
+/* MAIN CONTENT (FIXED ALIGNMENT) */
+.content {
+  margin-left: 220px;
+  padding: 30px;
+  width: calc(100% - 220px);
+  min-height: 100vh;
 }
