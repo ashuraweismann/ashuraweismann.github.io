@@ -2,6 +2,7 @@
 layout: home
 title: Home
 ---
+<link rel="stylesheet" href="/assets/css/style.css">
 
 <h2 style="color:#00ff9f;">> Initializing system...</h2>
 <p>> Access granted.</p>
