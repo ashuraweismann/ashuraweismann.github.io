@@ -3,31 +3,41 @@ layout: home
 title: Home
 ---
 
-# 💻 DarkShadow Blog
+<div class="terminal">
 
-> “Learning networking, security, and breaking things to understand them.”
+> booting darkshadow system...
+> loading modules...
+> access granted ✔
 
----
+</div>
 
-## 🚀 About This Blog
+<h1 class="glow">DARKSHADOW BLOG</h1>
 
-Welcome to my tech space where I share:
-
-- 🌐 Networking concepts  
-- 🛡️ Cybersecurity & CTF writeups  
-- ⚡ Internet & systems knowledge  
-
----
-
-## ⭐ Featured Post
-
-👉 [Understanding Internet Speed: What Really Matters?](/2026/04/12/internet-speed.html)
+<p class="subtitle">
+networking • cybersecurity • ctf • systems learning
+</p>
 
 ---
 
-## 🧠 Latest Thoughts
+## 📡 SYSTEM STATUS
 
-Stay tuned for more posts...
+🟢 Network: Online  
+🟢 Security Layer: Active  
+🟢 Learning Mode: Enabled  
 
+---
+
+## 🧠 ABOUT SYSTEM
+
+This is a knowledge terminal where I document:
+- Networking fundamentals  
+- Cybersecurity concepts  
+- CTF challenges  
+
+---
+
+## 🚀 LATEST ENTRY
+
+👉 [Understanding Internet Speed](/2026/04/12/internet-speed.html)
 
 <link rel="stylesheet" href="/assets/css/style.css">
