@@ -1,18 +1,31 @@
 ---
 ---
 
-body {
-  background: #0d1117 !important;
+/* Global override for ALL pages */
+html, body {
+  background-color: #0d1117 !important;
   color: #00ff9f !important;
   font-family: "Courier New", monospace !important;
 }
 
+/* Force all Minima containers */
+.site, .page-content, .wrapper {
+  background-color: #0d1117 !important;
+}
+
+/* Links */
 a {
   color: #00ff9f !important;
 }
 
-.site-header,
-.site-footer {
-  background: #010409 !important;
+/* Header + footer */
+.site-header, .site-footer {
+  background-color: #010409 !important;
   border-color: #00ff9f !important;
+}
+
+/* About + post pages */
+.post, .page {
+  background-color: transparent !important;
+  color: #00ff9f !important;
 }
