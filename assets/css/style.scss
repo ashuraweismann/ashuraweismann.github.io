@@ -1,0 +1,39 @@
+---
+---
+
+@import "minima";
+
+/* Hacker theme overrides */
+body {
+  background-color: #0d1117;
+  color: #00ff9f;
+  font-family: "Courier New", monospace;
+}
+
+a {
+  color: #00ff9f;
+}
+
+a:hover {
+  color: #00ffaa;
+}
+
+.site-header {
+  background: #010409;
+  border-bottom: 1px solid #00ff9f;
+}
+
+.site-title {
+  color: #00ff9f !important;
+  font-weight: bold;
+}
+
+.post-title {
+  color: #00ffaa;
+}
+
+code {
+  background: #010409;
+  color: #00ff9f;
+  padding: 2px 5px;
+}
