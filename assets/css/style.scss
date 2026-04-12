@@ -93,3 +93,14 @@ hr {
 @keyframes blink {
   50% { border-color: transparent; }
 }
+
+.post {
+  background: #0d1117;
+  border: 1px solid #00ff9f;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.post-title {
+  color: #00ff9f;
+}
