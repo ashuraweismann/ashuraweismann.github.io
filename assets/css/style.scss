@@ -39,6 +39,15 @@ a {
 }
 
 /* TEXT BLOCKS */
-h1, h2, h3, h4 {
+h2, h3, h4 {
   color: #00ff9f !important;
+}
+h1 {
+  border-bottom: 1px solid #00ff9f !important;
+  padding-bottom: 5px !important;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #00ff9f !important;
 }
