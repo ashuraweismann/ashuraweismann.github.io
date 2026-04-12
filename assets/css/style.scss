@@ -1,31 +1,44 @@
 ---
 ---
 
-/* Global override for ALL pages */
+/* =========================
+   GLOBAL BACKGROUND FIX
+========================= */
+
 html, body {
-  background-color: #0d1117 !important;
+  background: #0d1117 !important;
   color: #00ff9f !important;
   font-family: "Courier New", monospace !important;
 }
 
-/* Force all Minima containers */
-.site, .page-content, .wrapper {
-  background-color: #0d1117 !important;
+/* Minima wrapper layers */
+.wrapper,
+.site,
+.page-content {
+  background: #0d1117 !important;
 }
 
-/* Links */
+/* POSTS + PAGES */
+.post,
+.page,
+.post-content {
+  background: #0d1117 !important;
+  color: #00ff9f !important;
+}
+
+/* LINKS */
 a {
   color: #00ff9f !important;
 }
 
-/* Header + footer */
-.site-header, .site-footer {
-  background-color: #010409 !important;
+/* HEADER / FOOTER */
+.site-header,
+.site-footer {
+  background: #010409 !important;
   border-color: #00ff9f !important;
 }
 
-/* About + post pages */
-.post, .page {
-  background-color: transparent !important;
+/* TEXT BLOCKS */
+h1, h2, h3, h4 {
   color: #00ff9f !important;
 }
