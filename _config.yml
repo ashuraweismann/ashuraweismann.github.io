@@ -1,15 +1,15 @@
-title: darkShadow Tech Blog
+title: DarkShadow Blog
 description: CTF | Networking | Cyber Skills
-author: Ashura
-
-sass:
-  style: compressed
 
 theme: minima
 
-# Dark hacker styling
-minima:
-  skin: dark
+plugins:
+  - jekyll-feed
+  - jekyll-sass-converter
+
+sass:
+  sass_dir: assets/css
+  style: compressed
 
 header_pages:
   - index.md
