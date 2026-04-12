@@ -1,4 +1,3 @@
-
 ---
 layout: home
 title: Home
@@ -29,5 +28,6 @@ Welcome to my tech space where I share:
 ## 🧠 Latest Thoughts
 
 Stay tuned for more posts...
+
 
 <link rel="stylesheet" href="/assets/css/style.css">
