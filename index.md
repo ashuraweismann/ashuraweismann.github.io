@@ -3,6 +3,8 @@ layout: home
 title: Home
 ---
 
+<h2 class="typing">Initializing system...</h2>
+
 <div class="terminal">
 
 > booting darkshadow system...
