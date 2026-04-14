@@ -1,22 +1,73 @@
 ---
 layout: default
-title: Posts
+title: Archive
 ---
 
 # 📦 SYSTEM ARCHIVE
 
-> All logs, notes, and knowledge entries stored in DarkShadow system.
+> Accessing stored knowledge logs...
 
 ---
 
-## 🧠 All Posts
+## 🔍 Search Logs
 
-<ul>
+<input type="text" id="searchBox" placeholder="search logs..." onkeyup="searchPosts()" />
+
+---
+
+## 🧠 NETWORKING
+
+<ul class="post-list">
 {% for post in site.posts %}
+  {% if post.categories contains "networking" %}
   <li>
-    <a href="{{ post.url }}">
-      {{ post.date | date: "%Y-%m-%d" }} → {{ post.title }}
-    </a>
+    <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
+    <a href="{{ post.url }}">{{ post.title }}</a>
   </li>
+  {% endif %}
 {% endfor %}
 </ul>
+
+---
+
+## 🛡️ CTF
+
+<ul class="post-list">
+{% for post in site.posts %}
+  {% if post.categories contains "ctf" %}
+  <li>
+    <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
+    <a href="{{ post.url }}">{{ post.title }}</a>
+  </li>
+  {% endif %}
+{% endfor %}
+</ul>
+
+---
+
+## 📘 NOTES
+
+<ul class="post-list">
+{% for post in site.posts %}
+  {% if post.categories contains "notes" %}
+  <li>
+    <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
+    <a href="{{ post.url }}">{{ post.title }}</a>
+  </li>
+  {% endif %}
+{% endfor %}
+</ul>
+
+---
+
+<script>
+function searchPosts() {
+  let input = document.getElementById('searchBox').value.toLowerCase();
+  let items = document.querySelectorAll('.post-list li');
+
+  items.forEach(item => {
+    let text = item.innerText.toLowerCase();
+    item.style.display = text.includes(input) ? "" : "none";
+  });
+}
+</script>
