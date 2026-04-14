@@ -13,6 +13,11 @@ title: Home
 
 </div>
 
+<div class="cmd-box">
+  <span>> </span>
+  <input type="text" id="cmdInput" placeholder="type command..." />
+</div>
+
 <h1 class="glow">DARKSHADOW BLOG</h1>
 
 <p class="subtitle">
