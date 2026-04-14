@@ -3,6 +3,7 @@ layout: post
 title: "Understanding Internet Speed"
 date: 2026-04-12
 categories: [networking]
+tags: [bandwidth, latency, basics]
 ---
 <link rel="stylesheet" href="/assets/css/style.css">
 
