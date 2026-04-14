@@ -81,6 +81,15 @@ function searchPosts() {
     item.style.display = text.includes(input) ? "" : "none";
   });
 }
+
+  function filterTag(tag) {
+  let items = document.querySelectorAll('.post-list li');
+
+  items.forEach(item => {
+    let text = item.innerText.toLowerCase();
+    item.style.display = text.includes(tag) ? "" : "none";
+  });
+}
 </script>
 
 <link rel="stylesheet" href="/assets/css/style.css">
