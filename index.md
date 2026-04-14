@@ -10,9 +10,10 @@ title: Home
 > booting darkshadow system...
 > loading modules...
 > access granted ✔
-
+<div class="cmd-box">
   <span>> </span>
   <input type="text" id="cmdInput" placeholder="type command..." />
+</div>
 </div>
 
 <h1 class="glow">DARKSHADOW BLOG</h1>
