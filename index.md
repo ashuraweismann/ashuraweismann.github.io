@@ -11,9 +11,6 @@ title: Home
 > loading modules...
 > access granted ✔
 
-</div>
-
-<div class="cmd-box">
   <span>> </span>
   <input type="text" id="cmdInput" placeholder="type command..." />
 </div>
@@ -55,7 +52,7 @@ document.getElementById("cmdInput").addEventListener("keypress", function(e) {
     let cmd = this.value.trim();
 
     if (cmd === "cd /about") window.location.href = "/about";
-    else if (cmd === "cd /posts") window.location.href = "/archive";
+    else if (cmd === "cd /posts") window.location.href = "/posts";
     else if (cmd === "home") window.location.href = "/";
     else alert("command not found");
 
