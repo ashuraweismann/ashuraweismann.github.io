@@ -188,3 +188,20 @@ hr {
   color: #00ffaa;
   margin-right: 10px;
 }
+
+.tags {
+  margin-top: 20px;
+}
+
+.tag {
+  display: inline-block;
+  margin: 5px;
+  padding: 5px 10px;
+  border: 1px solid #00ff9f;
+  cursor: pointer;
+}
+
+.tag:hover {
+  background: #00ff9f;
+  color: black;
+}
