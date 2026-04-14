@@ -48,3 +48,18 @@ This is a knowledge terminal where I document:
 👉 [Understanding Internet Speed](/2026/04/12/internet-speed.html)
 
 <link rel="stylesheet" href="/assets/css/style.css">
+
+<script>
+document.getElementById("cmdInput").addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    let cmd = this.value.trim();
+
+    if (cmd === "cd /about") window.location.href = "/about";
+    else if (cmd === "cd /posts") window.location.href = "/archive";
+    else if (cmd === "home") window.location.href = "/";
+    else alert("command not found");
+
+    this.value = "";
+  }
+});
+</script>
