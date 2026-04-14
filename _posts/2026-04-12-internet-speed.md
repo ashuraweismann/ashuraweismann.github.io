@@ -1,7 +1,8 @@
 ---
 layout: post
-title: "Understanding Internet Speed: What Really Matters?"
+title: "Understanding Internet Speed"
 date: 2026-04-12
+categories: [networking]
 ---
 <link rel="stylesheet" href="/assets/css/style.css">
 
