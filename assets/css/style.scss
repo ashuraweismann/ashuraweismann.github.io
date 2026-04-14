@@ -205,3 +205,13 @@ hr {
   background: #00ff9f;
   color: black;
 }
+
+/* =========================
+   background STYLE
+========================= */
+#matrix {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
