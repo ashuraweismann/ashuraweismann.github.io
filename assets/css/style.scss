@@ -215,3 +215,24 @@ hr {
   left: 0;
   z-index: -1;
 }
+/* =========================
+   SIDERBAR STYLE
+========================= */
+.file-tree {
+  font-size: 14px;
+}
+
+.folder {
+  margin-bottom: 10px;
+  color: #00ffaa;
+}
+
+.file {
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.file a {
+  text-decoration: none;
+  color: #00ff9f;
+}
