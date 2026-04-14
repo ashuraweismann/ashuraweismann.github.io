@@ -15,6 +15,17 @@ title: Archive
 
 ---
 
+## 🧬 TAG SYSTEM
+
+<div class="tags">
+{% assign tags = site.tags %}
+{% for tag in tags %}
+  <span class="tag" onclick="filterTag('{{ tag[0] }}')">
+    #{{ tag[0] }}
+  </span>
+{% endfor %}
+</div>
+
 ## 🧠 NETWORKING
 
 <ul class="post-list">
