@@ -236,3 +236,20 @@ hr {
   text-decoration: none;
   color: #00ff9f;
 }
+
+/* =========================
+   TERMINAL BOX STYLE
+========================= */
+.cmd-box {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #00ff9f;
+}
+
+.cmd-box input {
+  background: transparent;
+  border: none;
+  color: #00ff9f;
+  outline: none;
+  width: 80%;
+}
