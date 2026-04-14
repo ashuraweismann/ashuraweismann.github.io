@@ -154,3 +154,37 @@ hr {
   width: calc(100% - 220px);
   min-height: 100vh;
 }
+
+
+/* =========================
+   ARCHIVE TERMINAL STYLE
+========================= */
+
+#searchBox {
+  width: 100%;
+  padding: 10px;
+  background: #010409;
+  border: 1px solid #00ff9f;
+  color: #00ff9f;
+  margin-bottom: 20px;
+}
+
+.post-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.post-list li {
+  margin: 8px 0;
+  font-family: "Courier New", monospace;
+}
+
+.post-list li::before {
+  content: "> ";
+  color: #00ff9f;
+}
+
+.date {
+  color: #00ffaa;
+  margin-right: 10px;
+}
