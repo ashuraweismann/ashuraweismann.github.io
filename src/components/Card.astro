@@ -1,0 +1,22 @@
+---
+const { title, category, image, desc } = Astro.props;
+---
+
+<div class="group bg-[#1f2937] rounded-lg overflow-hidden cursor-pointer hover:translate-y-[-5px] transition">
+
+  <img src={image}
+       class="w-full h-44 object-cover group-hover:scale-110 transition duration-300" />
+
+  <div class="p-4">
+    <span class="text-xs text-red-500 font-bold uppercase">{category}</span>
+
+    <h3 class="text-lg font-bold mt-1 group-hover:text-red-400">
+      {title}
+    </h3>
+
+    <p class="text-sm text-gray-400 mt-2">
+      {desc}
+    </p>
+  </div>
+
+</div>
