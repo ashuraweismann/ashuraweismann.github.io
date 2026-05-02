@@ -1,12 +1,127 @@
-<nav class="flex items-center justify-between px-6 py-4 bg-[#111827] border-b border-gray-800">
+<header class="nav-wrap">
+	<nav class="nav">
+		<a href="/" class="brand">
+			<span class="brand-mark"></span>
+			<span>
+				<strong>TECH BLOG</strong>
+				<small>Signals for builders</small>
+			</span>
+		</a>
 
-  <h1 class="text-2xl font-bold text-red-500">TECH BLOG</h1>
+		<div class="nav-links">
+			<a href="/">Home</a>
+			<a href="/blog">Articles</a>
+			<a href="/about">About</a>
+		</div>
 
-  <div class="hidden md:flex gap-6 text-gray-300">
-    <a class="hover:text-white">News</a>
-    <a class="hover:text-white">Reviews</a>
-    <a class="hover:text-white">AI</a>
-    <a class="hover:text-white">Cybersecurity</a>
-  </div>
+		<a href="/blog" class="nav-cta">Start Reading</a>
+	</nav>
+</header>
 
-</nav>
+<style>
+	.nav-wrap {
+		position: relative;
+		z-index: 2;
+		padding: 1.25rem 1.25rem 0;
+	}
+
+	.nav {
+		max-width: 1180px;
+		margin: 0 auto;
+		padding: 1rem 1.2rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		border: 1px solid rgba(148, 163, 184, 0.14);
+		border-radius: 24px;
+		background: rgba(7, 17, 31, 0.68);
+		backdrop-filter: blur(18px);
+		box-shadow: 0 20px 70px rgba(2, 6, 12, 0.28);
+	}
+
+	.brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.85rem;
+		min-width: 0;
+	}
+
+	.brand strong,
+	.brand small {
+		display: block;
+	}
+
+	.brand strong {
+		font-family: var(--heading);
+		font-size: 0.96rem;
+		letter-spacing: 0.18em;
+	}
+
+	.brand small {
+		color: var(--muted);
+		font-size: 0.78rem;
+		margin-top: 0.2rem;
+	}
+
+	.brand-mark {
+		width: 2.5rem;
+		height: 2.5rem;
+		border-radius: 18px;
+		background:
+			linear-gradient(135deg, rgba(87, 230, 255, 0.95), rgba(124, 92, 255, 0.95));
+		box-shadow: 0 0 28px rgba(87, 230, 255, 0.3);
+		position: relative;
+		flex-shrink: 0;
+	}
+
+	.brand-mark::after {
+		content: "";
+		position: absolute;
+		inset: 0.65rem;
+		border-radius: 10px;
+		border: 1px solid rgba(255, 255, 255, 0.46);
+	}
+
+	.nav-links {
+		display: flex;
+		align-items: center;
+		gap: 1.6rem;
+		color: var(--muted);
+		font-size: 0.95rem;
+	}
+
+	.nav-links a:hover,
+	.nav-links a:focus-visible {
+		color: var(--text);
+	}
+
+	.nav-cta {
+		padding: 0.85rem 1.15rem;
+		border-radius: 999px;
+		background: linear-gradient(135deg, var(--accent), #84f3ff);
+		color: #04111c;
+		font-weight: 800;
+		font-size: 0.92rem;
+		box-shadow: 0 14px 34px rgba(87, 230, 255, 0.22);
+	}
+
+	@media (max-width: 720px) {
+		.nav {
+			padding: 1rem;
+			flex-wrap: wrap;
+		}
+
+		.nav-links {
+			order: 3;
+			width: 100%;
+			justify-content: space-between;
+			gap: 0.8rem;
+			font-size: 0.88rem;
+		}
+
+		.nav-cta {
+			padding-inline: 1rem;
+		}
+	}
+</style>
