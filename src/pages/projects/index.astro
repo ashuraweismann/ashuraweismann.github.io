@@ -1,0 +1,31 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../data/projects';
+---
+
+<Layout
+	title="Projects | Ashura Weismann"
+	description="Developer projects spanning CTF tooling, web security, DevOps, and internal engineering utilities."
+>
+	<section class="grid-shell pt-12 pb-16 sm:pt-16">
+		<div class="panel px-6 py-10 sm:px-10">
+			<p class="section-title">Portfolio</p>
+			<h1 class="mt-4 text-4xl font-semibold tracking-tight text-slate-50 sm:text-5xl">
+				Projects across security, tooling, and delivery
+			</h1>
+			<p class="mt-5 max-w-3xl text-lg leading-8 text-slate-300">
+				A curated set of portfolio work with enough context to show what was built, how it was
+				approached, and which parts map to CTF, web, DevOps, or internal tools.
+			</p>
+		</div>
+
+		<div class="mt-8 grid gap-6 md:grid-cols-2">
+			{
+				projects.map((project) => (
+					<ProjectCard {...project} featured={project.featured} />
+				))
+			}
+		</div>
+	</section>
+</Layout>

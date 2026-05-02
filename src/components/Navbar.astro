@@ -1,127 +1,80 @@
-<header class="nav-wrap">
-	<nav class="nav">
-		<a href="/" class="brand">
-			<span class="brand-mark"></span>
-			<span>
-				<strong>TECH BLOG</strong>
-				<small>Signals for builders</small>
-			</span>
-		</a>
+---
+const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
 
-		<div class="nav-links">
-			<a href="/">Home</a>
-			<a href="/blog">Articles</a>
-			<a href="/about">About</a>
+const navItems = [
+	{ href: '/', label: 'Home' },
+	{ href: '/about', label: 'About' },
+	{ href: '/blog', label: 'Blog' },
+	{ href: '/projects', label: 'Projects' },
+];
+
+const isActive = (href: string) =>
+	href === '/'
+		? pathname === '/'
+		: pathname === href || pathname.startsWith(`${href}/`);
+---
+
+<header class="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
+	<div class="grid-shell">
+		<nav class="flex items-center justify-between gap-4 py-4">
+			<a href="/" class="group inline-flex items-center gap-3">
+				<div
+					class="flex h-11 w-11 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/10 font-mono text-sm font-bold text-cyan-300 transition group-hover:border-cyan-300 group-hover:bg-cyan-400/20"
+				>
+					AW
+				</div>
+				<div>
+					<p class="text-sm font-semibold tracking-wide text-slate-50">Ashura Weismann</p>
+					<p class="font-mono text-xs uppercase tracking-[0.28em] text-slate-400">
+						Engineer / CTF / Blog
+					</p>
+				</div>
+			</a>
+
+			<div class="hidden items-center gap-2 rounded-full border border-white/10 bg-slate-900/70 p-1 md:flex">
+				{
+					navItems.map((item) => (
+						<a
+							href={item.href}
+							class:list={[
+								'rounded-full px-4 py-2 text-sm font-medium transition',
+								isActive(item.href)
+									? 'bg-cyan-400/15 text-cyan-200'
+									: 'text-slate-300 hover:bg-white/5 hover:text-slate-50',
+							]}
+						>
+							{item.label}
+						</a>
+					))
+				}
+			</div>
+
+			<a
+				href="https://github.com/ashuraweismann"
+				target="_blank"
+				rel="noreferrer"
+				class="hidden rounded-full border border-white/10 px-4 py-2 text-sm font-medium text-slate-300 transition hover:border-cyan-400/40 hover:text-cyan-200 sm:inline-flex"
+			>
+				GitHub
+			</a>
+		</nav>
+
+		<div class="flex gap-2 pb-4 md:hidden">
+			{
+				navItems.map((item) => (
+					<a
+						href={item.href}
+						class:list={[
+							'flex-1 rounded-2xl px-3 py-2 text-center text-xs font-medium transition',
+							isActive(item.href)
+								? 'bg-cyan-400/15 text-cyan-200'
+								: 'bg-white/5 text-slate-300 hover:bg-white/10 hover:text-slate-50',
+						]}
+					>
+						{item.label}
+					</a>
+				))
+			}
 		</div>
-
-		<a href="/blog" class="nav-cta">Start Reading</a>
-	</nav>
+	</div>
 </header>
-
-<style>
-	.nav-wrap {
-		position: relative;
-		z-index: 2;
-		padding: 1.25rem 1.25rem 0;
-	}
-
-	.nav {
-		max-width: 1180px;
-		margin: 0 auto;
-		padding: 1rem 1.2rem;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 1rem;
-		border: 1px solid rgba(148, 163, 184, 0.14);
-		border-radius: 24px;
-		background: rgba(7, 17, 31, 0.68);
-		backdrop-filter: blur(18px);
-		box-shadow: 0 20px 70px rgba(2, 6, 12, 0.28);
-	}
-
-	.brand {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.85rem;
-		min-width: 0;
-	}
-
-	.brand strong,
-	.brand small {
-		display: block;
-	}
-
-	.brand strong {
-		font-family: var(--heading);
-		font-size: 0.96rem;
-		letter-spacing: 0.18em;
-	}
-
-	.brand small {
-		color: var(--muted);
-		font-size: 0.78rem;
-		margin-top: 0.2rem;
-	}
-
-	.brand-mark {
-		width: 2.5rem;
-		height: 2.5rem;
-		border-radius: 18px;
-		background:
-			linear-gradient(135deg, rgba(87, 230, 255, 0.95), rgba(124, 92, 255, 0.95));
-		box-shadow: 0 0 28px rgba(87, 230, 255, 0.3);
-		position: relative;
-		flex-shrink: 0;
-	}
-
-	.brand-mark::after {
-		content: "";
-		position: absolute;
-		inset: 0.65rem;
-		border-radius: 10px;
-		border: 1px solid rgba(255, 255, 255, 0.46);
-	}
-
-	.nav-links {
-		display: flex;
-		align-items: center;
-		gap: 1.6rem;
-		color: var(--muted);
-		font-size: 0.95rem;
-	}
-
-	.nav-links a:hover,
-	.nav-links a:focus-visible {
-		color: var(--text);
-	}
-
-	.nav-cta {
-		padding: 0.85rem 1.15rem;
-		border-radius: 999px;
-		background: linear-gradient(135deg, var(--accent), #84f3ff);
-		color: #04111c;
-		font-weight: 800;
-		font-size: 0.92rem;
-		box-shadow: 0 14px 34px rgba(87, 230, 255, 0.22);
-	}
-
-	@media (max-width: 720px) {
-		.nav {
-			padding: 1rem;
-			flex-wrap: wrap;
-		}
-
-		.nav-links {
-			order: 3;
-			width: 100%;
-			justify-content: space-between;
-			gap: 0.8rem;
-			font-size: 0.88rem;
-		}
-
-		.nav-cta {
-			padding-inline: 1rem;
-		}
-	}
-</style>
