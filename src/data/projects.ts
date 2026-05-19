@@ -58,5 +58,22 @@ export const projects: Project[] = [
     'Full-Stack (Frontend + Mock Backend)'
   ],
   featured: true,
-},
+	},
+	{
+	name: 'Gaming Cafe Network Infrastructure Simulation',
+	description:
+		'Designed and simulated a secure, scalable gaming cafe network with VLAN segmentation for gaming, staff, and Wi-Fi users. Implemented network topology, IP addressing, switching, routing, and access control concepts using Cisco Packet Tracer and recreated an advanced version in GNS3 for realistic network emulation.',
+	techStack: [
+		'Cisco Packet Tracer',
+		'GNS3',
+		'Networking',
+		'VLANs',
+		'IP Addressing',
+		'Network Security',
+		'Switching & Routing'
+	],
+	github: 'https://github.com/ashuraweismann/gaming-center-network',
+	tags: ['Networking', 'Cybersecurity', 'Simulation', 'Infrastructure'],
+	featured: true,
+	}
 ];
