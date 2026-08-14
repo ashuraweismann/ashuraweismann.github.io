@@ -1,0 +1,40 @@
+name: Blog Agent
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            blog-agent/package-lock.json
+
+      - name: Install blog agent dependencies
+        working-directory: blog-agent
+        run: npm ci
+
+      - name: Run blog agent
+        working-directory: blog-agent
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_OWNER: ashuraweismann
+          GITHUB_REPO: ashuraweismann.github.io
+        run: npm run test
