@@ -22,3 +22,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Blog Agent secrets
+blog-agent/.env
+blog-agent/node_modules/
+blog-agent/dist/
