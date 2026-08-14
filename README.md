@@ -1,5 +1,7 @@
 # Astro Starter Kit: Blog
 
+### CI workflow test
+
 ```sh
 npm create astro@latest -- --template blog
 ```
