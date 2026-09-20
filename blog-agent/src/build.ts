@@ -1,58 +1,71 @@
-import path from "node:path";
-import { spawn } from "node:child_process";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+import { fileURLToPath } from "node:url";
+import { dirname, resolve } from "node:path";
 
-export function runAstroBuild(): Promise<void> {
-  return new Promise((resolve, reject) => {
-    console.log("\n🏗️ Running Astro build...\n");
+const execFileAsync = promisify(execFile);
 
-    const blogRoot = path.resolve(
-      process.cwd(),
-      ".."
-    );
+const agentSrcDirectory = dirname(fileURLToPath(import.meta.url));
 
-    const isWindows =
-      process.platform === "win32";
+// build.ts is located at:
+// tech-blog/blog-agent/src/build.ts
+//
+// Going two levels up:
+// src -> blog-agent -> tech-blog
+const projectRoot = resolve(agentSrcDirectory, "../..");
 
-    const command = isWindows
-      ? process.env.ComSpec || "cmd.exe"
-      : "npm";
+export async function runAstroBuild(): Promise<void> {
+  console.log("\n🏗️ Running Astro build...\n");
+  console.log(`📁 Project root: ${projectRoot}`);
 
-    const args = isWindows
-      ? ["/d", "/s", "/c", "npm run build"]
-      : ["run", "build"];
+  const isWindows = process.platform === "win32";
 
-    const child = spawn(
-      command,
-      args,
-      {
-        cwd: blogRoot,
-        stdio: "inherit",
-        shell: false
-      }
-    );
+  try {
+    let result;
 
-    child.on("error", (error) => {
-      reject(
-        new Error(
-          `Failed to start Astro build: ${error.message}`
-        )
+    if (isWindows) {
+      // Execute npm through Windows Command Prompt.
+      // This avoids EINVAL errors when spawning npm.cmd directly.
+      result = await execFileAsync(
+        process.env.COMSPEC || "cmd.exe",
+        ["/d", "/s", "/c", "npm run build"],
+        {
+          cwd: projectRoot,
+          windowsHide: true,
+          maxBuffer: 10 * 1024 * 1024,
+        }
       );
-    });
+    } else {
+      result = await execFileAsync(
+        "npm",
+        ["run", "build"],
+        {
+          cwd: projectRoot,
+          maxBuffer: 10 * 1024 * 1024,
+        }
+      );
+    }
 
-    child.on("close", (code) => {
-      if (code === 0) {
-        console.log(
-          "\n✅ Astro build passed.\n"
-        );
+    if (result.stdout) {
+      console.log(result.stdout);
+    }
 
-        resolve();
-      } else {
-        reject(
-          new Error(
-            `Astro build failed with exit code ${code}`
-          )
-        );
-      }
-    });
-  });
+    if (result.stderr) {
+      console.error(result.stderr);
+    }
+
+    console.log("✅ Astro build passed.\n");
+  } catch (error: any) {
+    if (error.stdout) {
+      console.log(error.stdout);
+    }
+
+    if (error.stderr) {
+      console.error(error.stderr);
+    }
+
+    throw new Error(
+      `Astro build failed with exit code ${error.code ?? "unknown"}`
+    );
+  }
 }

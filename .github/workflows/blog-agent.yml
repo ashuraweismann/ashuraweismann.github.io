@@ -7,17 +7,19 @@ permissions:
   contents: write
   pull-requests: write
 
+concurrency:
+  group: blog-agent
+  cancel-in-progress: false
+
 jobs:
-  generate:
+  blog-agent:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -26,11 +28,14 @@ jobs:
             package-lock.json
             blog-agent/package-lock.json
 
-      - name: Install blog agent dependencies
+      - name: Install Astro dependencies
+        run: npm ci
+
+      - name: Install Blog Agent dependencies
         working-directory: blog-agent
         run: npm ci
 
-      - name: Run blog agent
+      - name: Run Blog Agent
         working-directory: blog-agent
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
