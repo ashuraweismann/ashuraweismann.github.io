@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 export interface ExistingPost {
   file: string;
@@ -9,9 +10,13 @@ export interface ExistingPost {
   tags: string[];
 }
 
+const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
+
+// blog.ts is at: tech-blog/blog-agent/src/blog.ts
+// Resolve to tech-blog/src/content/blog
 const BLOG_DIR = path.resolve(
-  process.cwd(),
-  "../src/content/blog"
+  currentDirectory,
+  "../../src/content/blog"
 );
 
 function extractFrontmatter(content: string): string {

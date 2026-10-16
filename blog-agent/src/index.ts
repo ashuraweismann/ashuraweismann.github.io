@@ -1,4 +1,4 @@
-import { writeBlogPost } from "./file.js";
+import { writeBlogPost, rollbackBlogPost } from "./file.js";
 import { runAstroBuild } from "./build.js";
 
 import { getExistingPosts } from "./blog.js";
@@ -209,14 +209,14 @@ async function main() {
     // 6. Write article to Astro blog
     // ============================================
 
-    const filePath =
+    const writeResult =
       await writeBlogPost(
         markdown.filename,
         markdown.content
       );
 
     console.log(
-      `💾 Article written to: ${filePath}`
+      `💾 Article written to: ${writeResult.filePath}`
     );
 
     // ============================================
@@ -243,6 +243,23 @@ async function main() {
       console.error(
         "The generated article will NOT be pushed."
       );
+
+      try {
+        await rollbackBlogPost(writeResult);
+        if (writeResult.isNew) {
+          console.log(
+            `🧹 Cleaned up invalid draft: ${writeResult.filePath}`
+          );
+        } else {
+          console.log(
+            `🔄 Restored previous post content: ${writeResult.filePath}`
+          );
+        }
+      } catch (cleanupError) {
+        console.warn(
+          `⚠️ Failed to roll back draft file: ${cleanupError}`
+        );
+      }
 
       throw error;
     }
