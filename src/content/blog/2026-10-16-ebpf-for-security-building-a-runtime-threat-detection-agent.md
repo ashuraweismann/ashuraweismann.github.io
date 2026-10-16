@@ -94,7 +94,7 @@ A common detection is a web server worker process spawning an interactive shell 
 bpftrace -e 'tracepoint:syscalls:sys_enter_execve /(comm == "nginx" || comm == "apache2") && (str(args->filename) == "/bin/sh" || str(args->filename) == "/bin/bash" || str(args->filename) == "/usr/bin/bash" || str(args->filename) == "/bin/dash")/ { printf("ALERT: Shell spawned by web server %s (pid=%d): %s\n", comm, pid, str(args->filename)); }'
 ```
 
-Checking both the parent process name (`comm`) and the target executable (`args->filename`) significantly reduces false positives while catching reverse shells and injected shell commands.
+Matching both the current caller name (`comm`) and target executable (`args->filename`) significantly reduces false positives while catching some reverse shells and injected shell commands.
 
 ### Monitoring sensitive file access
 
