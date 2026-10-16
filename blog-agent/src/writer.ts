@@ -156,7 +156,7 @@ Use exactly this structure:
     );
   }
 
-  let parsed: unknown;
+  let parsed: any;
 
   try {
     parsed = JSON.parse(raw);
@@ -166,5 +166,30 @@ Use exactly this structure:
     );
   }
 
-  return ArticleSchema.parse(parsed);
+  const normalized = normalizeArticle(parsed);
+
+  return ArticleSchema.parse(normalized);
+}
+
+function normalizeArticle(parsed: any): any {
+  if (!parsed || typeof parsed !== "object") {
+    return parsed;
+  }
+
+  let tags: string[] = [];
+  if (Array.isArray(parsed.tags)) {
+    tags = parsed.tags
+      .map((t: any) => (typeof t === "string" ? t.trim() : String(t?.name || t?.tag || t || "").trim()))
+      .filter(Boolean);
+  } else if (typeof parsed.tags === "string") {
+    tags = parsed.tags.split(",").map((t: string) => t.trim()).filter(Boolean);
+  }
+
+  return {
+    ...parsed,
+    title: typeof parsed.title === "string" ? parsed.title.trim() : String(parsed.title || ""),
+    description: typeof parsed.description === "string" ? parsed.description.trim() : String(parsed.description || ""),
+    tags,
+    content: typeof parsed.content === "string" ? parsed.content.trim() : String(parsed.content || "")
+  };
 }

@@ -97,6 +97,8 @@ Minor suggestions do NOT necessarily require rejection.
 
 Return ONLY valid JSON:
 
+IMPORTANT: "issues" and "suggestions" MUST be arrays of plain strings (e.g. ["issue 1", "issue 2"]), NEVER objects or nested structures.
+
 {
   "approved": true,
   "score": 8.5,
@@ -118,7 +120,7 @@ Return ONLY valid JSON:
         {
           role: "system",
           content:
-            "You are a strict but fair senior cybersecurity technical reviewer. Return only valid JSON."
+            "You are a strict but fair senior cybersecurity technical reviewer. Return only valid JSON with issues and suggestions as plain string arrays."
         },
         {
           role: "user",
@@ -142,7 +144,7 @@ Return ONLY valid JSON:
     );
   }
 
-  let parsed: unknown;
+  let parsed: any;
 
   try {
     parsed = JSON.parse(raw);
@@ -152,5 +154,76 @@ Return ONLY valid JSON:
     );
   }
 
-  return ReviewSchema.parse(parsed);
+  const normalized = normalizeReview(parsed);
+
+  return ReviewSchema.parse(normalized);
+}
+
+function normalizeStringList(value: unknown): string[] {
+  if (!value) {
+    return [];
+  }
+
+  if (typeof value === "string") {
+    return value.trim() ? [value.trim()] : [];
+  }
+
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => {
+        if (typeof item === "string") {
+          return item.trim();
+        }
+
+        if (item && typeof item === "object") {
+          const candidate =
+            (item as any).description ??
+            (item as any).issue ??
+            (item as any).suggestion ??
+            (item as any).message ??
+            (item as any).text ??
+            (item as any).detail ??
+            Object.values(item).filter((v) => typeof v === "string").join(": ");
+
+          return String(candidate || JSON.stringify(item)).trim();
+        }
+
+        return String(item ?? "").trim();
+      })
+      .filter(Boolean);
+  }
+
+  return [];
+}
+
+function normalizeScore(value: unknown): number {
+  const number = Number(value);
+
+  if (!Number.isFinite(number)) {
+    return 0;
+  }
+
+  // If the model returns a percentage such as 90, convert to 0-10
+  if (number > 10 && number <= 100) {
+    return number / 10;
+  }
+
+  return Math.min(10, Math.max(0, number));
+}
+
+function normalizeReview(parsed: any): any {
+  if (!parsed || typeof parsed !== "object") {
+    return parsed;
+  }
+
+  return {
+    ...parsed,
+    approved: Boolean(parsed.approved),
+    score: normalizeScore(parsed.score),
+    technicalAccuracy: normalizeScore(parsed.technicalAccuracy),
+    usefulness: normalizeScore(parsed.usefulness),
+    readability: normalizeScore(parsed.readability),
+    issues: normalizeStringList(parsed.issues),
+    suggestions: normalizeStringList(parsed.suggestions)
+  };
 }
