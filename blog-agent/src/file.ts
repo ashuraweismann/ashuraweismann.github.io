@@ -11,10 +11,16 @@ const BLOG_DIR = path.resolve(
   "../../src/content/blog"
 );
 
+export interface WritePostResult {
+  filePath: string;
+  isNew: boolean;
+  previousContent?: string;
+}
+
 export async function writeBlogPost(
   filename: string,
   content: string
-): Promise<string> {
+): Promise<WritePostResult> {
   await fs.mkdir(BLOG_DIR, {
     recursive: true
   });
@@ -24,13 +30,29 @@ export async function writeBlogPost(
     filename
   );
 
+  let isNew = true;
+  let previousContent: string | undefined;
+
+  try {
+    previousContent = await fs.readFile(filePath, "utf8");
+    isNew = false;
+  } catch (error: any) {
+    if (error?.code !== "ENOENT") {
+      throw error;
+    }
+  }
+
   await fs.writeFile(
     filePath,
     content,
     "utf8"
   );
 
-  return filePath;
+  return {
+    filePath,
+    isNew,
+    previousContent
+  };
 }
 
 export async function deleteBlogPost(filePath: string): Promise<void> {
@@ -40,5 +62,19 @@ export async function deleteBlogPost(filePath: string): Promise<void> {
     if (error?.code !== "ENOENT") {
       throw error;
     }
+  }
+}
+
+export async function rollbackBlogPost(
+  result: WritePostResult
+): Promise<void> {
+  if (result.isNew) {
+    await deleteBlogPost(result.filePath);
+  } else if (result.previousContent !== undefined) {
+    await fs.writeFile(
+      result.filePath,
+      result.previousContent,
+      "utf8"
+    );
   }
 }
