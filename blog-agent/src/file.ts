@@ -1,12 +1,14 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
+const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
+
+// file.ts is at: tech-blog/blog-agent/src/file.ts
+// Resolve to tech-blog/src/content/blog
 const BLOG_DIR = path.resolve(
-  process.cwd(),
-  "..",
-  "src",
-  "content",
-  "blog"
+  currentDirectory,
+  "../../src/content/blog"
 );
 
 export async function writeBlogPost(
@@ -29,4 +31,14 @@ export async function writeBlogPost(
   );
 
   return filePath;
+}
+
+export async function deleteBlogPost(filePath: string): Promise<void> {
+  try {
+    await fs.unlink(filePath);
+  } catch (error: any) {
+    if (error?.code !== "ENOENT") {
+      throw error;
+    }
+  }
 }

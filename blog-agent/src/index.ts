@@ -1,4 +1,4 @@
-import { writeBlogPost } from "./file.js";
+import { writeBlogPost, deleteBlogPost } from "./file.js";
 import { runAstroBuild } from "./build.js";
 
 import { getExistingPosts } from "./blog.js";
@@ -243,6 +243,17 @@ async function main() {
       console.error(
         "The generated article will NOT be pushed."
       );
+
+      try {
+        await deleteBlogPost(filePath);
+        console.log(
+          `🧹 Cleaned up invalid draft: ${filePath}`
+        );
+      } catch (cleanupError) {
+        console.warn(
+          `⚠️ Failed to clean up draft file: ${cleanupError}`
+        );
+      }
 
       throw error;
     }
