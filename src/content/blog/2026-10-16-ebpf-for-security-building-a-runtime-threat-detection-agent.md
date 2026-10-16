@@ -64,7 +64,7 @@ uname -r
 ls /sys/kernel/btf/vmlinux
 ```
 
-If BTF is missing, you may need a newer kernel or the appropriate `linux-headers` package. Install bpftrace using your distribution package manager, for example `apt install bpftrace` on Debian-like systems. Running eBPF tools usually requires root or capabilities such as `CAP_BPF` and `CAP_PERFMON` on newer kernels.
+If BTF is missing, ensure your running kernel was compiled with BTF support (`CONFIG_DEBUG_INFO_BTF=y`), which is standard on modern enterprise and cloud Linux distributions (Ubuntu 20.04+, Debian 11+, RHEL 8.2+). Kernel header packages (`linux-headers`) are not required for kernel BTF itself, though development toolchains like BCC still need them to compile programs against kernel structures. Install bpftrace using your distribution package manager, for example `apt install bpftrace` on Debian-like systems. Running eBPF tools usually requires root or capabilities such as `CAP_BPF` and `CAP_PERFMON` on newer kernels.
 
 ### Counting syscalls by process
 
@@ -88,13 +88,13 @@ bpftrace -e 'tracepoint:syscalls:sys_enter_execve { printf("%s (pid=%d) execs %s
 
 ### Detecting suspicious shell spawns
 
-A common detection is a web server process spawning a shell. This rule filters for `nginx` or `apache2`:
+A common detection is a web server worker process spawning an interactive shell (e.g. `/bin/sh` or `/bin/bash`), often indicating a web shell or remote command execution. To avoid alerting on every routine worker execution, match both the web server caller and the target binary path:
 
 ```bash
-bpftrace -e 'tracepoint:syscalls:sys_enter_execve /comm == "nginx" || comm == "apache2"/ { printf("ALERT: %s (pid=%d) execs %s\n", comm, pid, str(args->filename)); }'
+bpftrace -e 'tracepoint:syscalls:sys_enter_execve /(comm == "nginx" || comm == "apache2") && (str(args->filename) == "/bin/sh" || str(args->filename) == "/bin/bash" || str(args->filename) == "/usr/bin/bash" || str(args->filename) == "/bin/dash")/ { printf("ALERT: Shell spawned by web server %s (pid=%d): %s\n", comm, pid, str(args->filename)); }'
 ```
 
-The filter `/comm == "nginx" || comm == "apache2"/` reduces noise. False positives can occur during legitimate maintenance or deployments, so pair this with allowlists for expected scripts.
+Checking both the parent process name (`comm`) and the target executable (`args->filename`) significantly reduces false positives while catching reverse shells and injected shell commands.
 
 ### Monitoring sensitive file access
 
@@ -174,7 +174,7 @@ A useful event schema includes a timestamp, hostname, event type, process ID, pa
 
 eBPF is powerful, and that power cuts both ways. Loading eBPF programs typically requires elevated privileges such as `CAP_BPF` and `CAP_PERFMON`, or `CAP_SYS_ADMIN` on older kernels. An attacker who already has root can use eBPF to hide processes, intercept syscalls, or exfiltrate data. Kernel verifier bugs have historically led to privilege escalation, so keeping the kernel patched is important. We will not cite specific CVEs here, but the general risk is real.
 
-Unprivileged eBPF is controlled by the `kernel.unprivileged_bpf_disabled` sysctl. A value of `0` allows unprivileged users to load some program types, which expands the attack surface. A value of `1` disables unprivileged BPF. A value of `2` disables it and prevents re-enabling at runtime until reboot. Defenders should generally set this to `1` or `2` unless there is a specific need.
+Unprivileged eBPF is controlled by the `kernel.unprivileged_bpf_disabled` sysctl. A value of `0` allows unprivileged users to load some program types, which expands the attack surface. A value of `1` disables unprivileged BPF permanently until reboot (acting as an immutable one-way latch; attempts to set it back to 0 will be rejected with an error). A value of `2` disables unprivileged BPF while still permitting an administrator to re-enable it at runtime by setting it back to 0. Defenders should generally set this to `1` for production hardening or `2` if administrative workflows may need temporary re-enabling.
 
 Detection evasion is another concern. An attacker may kill the agent, unload its BPF programs, or use userland evasion techniques such as `LD_PRELOAD`. A kernel-level attacker can tamper with the agent or the kernel itself. Your agent should be monitored, its configuration should be integrity-checked, and alerts should be sent to a remote SIEM so that local tampering does not erase evidence.
 
@@ -190,7 +190,7 @@ Disable unprivileged BPF unless you have a clear requirement. For example:
 sysctl -w kernel.unprivileged_bpf_disabled=1
 ```
 
-To persist the setting, add it to a file under `/etc/sysctl.d/`. Remember that value `2` is stricter but may also affect legitimate workflows, so understand the trade-off.
+To persist the setting, add it to a file under `/etc/sysctl.d/`. Setting the value to `1` provides maximum immutability since it cannot be changed back to `0` without rebooting the system.
 
 Monitor BPF activity on your hosts. Tools such as `bpftool prog list` and `bpftool map list` show loaded programs and maps. Unexpected programs can indicate malicious or unmanaged eBPF use. Audit logs and immutable logging can help. In container environments, restrict the `bpf` syscall with seccomp profiles and drop capabilities such as `CAP_BPF` and `CAP_SYS_ADMIN` from workloads that do not need them.
 
