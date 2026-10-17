@@ -60,20 +60,74 @@ export const projects: Project[] = [
   featured: true,
 	},
 	{
-	name: 'Gaming Cafe Network Infrastructure Simulation',
-	description:
-		'Designed and simulated a secure, scalable gaming cafe network with VLAN segmentation for gaming, staff, and Wi-Fi users. Implemented network topology, IP addressing, switching, routing, and access control concepts using Cisco Packet Tracer and recreated an advanced version in GNS3 for realistic network emulation.',
-	techStack: [
-		'Cisco Packet Tracer',
-		'GNS3',
-		'Networking',
-		'VLANs',
-		'IP Addressing',
-		'Network Security',
-		'Switching & Routing'
-	],
-	github: 'https://github.com/ashuraweismann/gaming-center-network',
-	tags: ['Networking', 'Cybersecurity', 'Simulation', 'Infrastructure'],
-	featured: true,
+		name: 'Gaming Cafe Network Infrastructure Simulation',
+		description:
+			'Designed and simulated a secure, scalable gaming cafe network with VLAN segmentation for gaming, staff, and Wi-Fi users. Implemented network topology, IP addressing, switching, routing, and access control concepts using Cisco Packet Tracer and recreated an advanced version in GNS3 for realistic network emulation.',
+		techStack: [
+			'Cisco Packet Tracer',
+			'GNS3',
+			'Networking',
+			'VLANs',
+			'IP Addressing',
+			'Network Security',
+			'Switching & Routing'
+		],
+		github: 'https://github.com/ashuraweismann/gaming-center-network',
+		tags: ['Networking', 'Cybersecurity', 'Simulation', 'Infrastructure'],
+		featured: false,
+	},
+	{
+		name: 'CyberXInfinity Web Application',
+		description:
+			'A full-stack gamified cybersecurity learning and assessment platform featuring interactive web security labs, AI-driven hints and walkthroughs, quiz modules, aura streaks, and real-time multiplayer CTF battles.',
+		techStack: ['React', 'Node.js', 'Express', 'Supabase', 'Groq API', 'Socket.IO', 'Tailwind CSS'],
+		github: 'https://github.com/ashuraweismann/CyberXInfinity-Web-Application',
+		tags: ['Cybersecurity', 'Gamification', 'Full-Stack', 'AI', 'CTF', 'WebSockets'],
+		featured: true,
+	},
+	{
+		name: 'Containerized DevOps AI Chat Platform',
+		description:
+			'A multi-container full-stack conversational AI application orchestrating frontend, backend, and database microservices with Docker Compose. Features JWT-based auth, persistent chat history, and modular AI integrations.',
+		techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'Docker', 'Docker Compose', 'JWT'],
+		github: 'https://github.com/ashuraweismann/-devops-ai-chat-web-application',
+		tags: ['DevOps', 'Docker', 'Full-Stack', 'AI', 'Microservices', 'MongoDB'],
+		featured: true,
+	},
+	{
+		name: 'Squid Proxy Access Control & Filtering Lab',
+		description:
+			'Simulated an enterprise-grade forward proxy architecture on Ubuntu Server using Squid. Configured isolated subnet routing, domain-based Access Control Lists (ACLs), URL filtering, and proxy transaction logging.',
+		techStack: ['Squid Proxy', 'Ubuntu Server', 'VirtualBox', 'Linux', 'Bash', 'Networking'],
+		github: 'https://github.com/ashuraweismann/squid-proxy-filter-lab',
+		tags: ['Networking', 'SysAdmin', 'Proxy', 'Network Security', 'Linux'],
+		featured: false,
+	},
+	{
+		name: 'ClipCycle (Keyboard-First Clipboard Manager)',
+		description:
+			'A lightweight, keyboard-first Windows clipboard history cycler written in Python. Monitors copied text, maintains an in-memory history ring, and enables seamless clipboard cycling through global hotkeys.',
+		techStack: ['Python', 'Win32 API', 'Keyboard Hooks', 'Automation'],
+		github: 'https://github.com/ashuraweismann/clipcycle',
+		tags: ['Python', 'Tooling', 'Automation', 'Windows'],
+		featured: false,
+	},
+	{
+		name: 'Intrusion Detection Log Analyzer',
+		description:
+			'A high-performance C++ security utility designed to ingest and parse system logs. Structures log records using custom linked lists to detect anomalies, suspicious authentication attempts, and intrusion patterns.',
+		techStack: ['C++', 'Data Structures', 'Linux Syslog', 'CLI', 'Makefile'],
+		github: 'https://github.com/ashuraweismann/Intrusion-Detection-Log-Analyzer',
+		tags: ['C++', 'Systems Programming', 'Log Analysis', 'Security Tooling'],
+		featured: false,
+	},
+	{
+		name: 'CTF Writeups & Security Research Hub',
+		description:
+			'Comprehensive archive of hands-on capture-the-flag solutions, vulnerability analyses, and proof-of-concept writeups across PicoCTF, TryHackMe, and HackTheBox spanning Web Exploitation, Forensics, and Cryptography.',
+		techStack: ['Burp Suite', 'Wireshark', 'Python', 'Linux', 'GDB', 'Web Exploitation'],
+		github: 'https://github.com/ashuraweismann/ctf-writeups',
+		tags: ['CTF', 'Web Exploitation', 'Penetration Testing', 'Writeups'],
+		featured: false,
 	}
 ];
