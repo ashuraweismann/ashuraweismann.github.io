@@ -1,6 +1,9 @@
 name: Blog Agent
 
 on:
+  schedule:
+    # Runs every Sunday at 14:00 UTC (2:00 PM UTC)
+    - cron: '0 14 * * 0'
   workflow_dispatch:
 
 permissions:
